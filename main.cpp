@@ -335,8 +335,9 @@ void run() {
 
 		offset<uint16_t>(&create_info, 0x20) = map_tile_width;
 		offset<uint16_t>(&create_info, 0x22) = map_tile_height;
-
-		uint32_t game_type = 0x10002;
+		
+		// MELEE = 0x10002
+		uint32_t game_type = 0x1000a; // either 0x1000a or 0x10010
 
 		offset<uint8_t>(&create_info, 0x24) = 1; // active player count
 		offset<uint8_t>(&create_info, 0x25) = players_count;
@@ -349,11 +350,11 @@ void run() {
 		offset<uint16_t>(&create_info, 0x71) = 0;
 		offset<uint16_t>(&create_info, 0x73) = 0;
 
-		offset<uint8_t>(&create_info, 0x75) = 1; // various game settings stuff
-		offset<uint8_t>(&create_info, 0x76) = 1; // some of these would need to be changed for ums
+		offset<uint8_t>(&create_info, 0x75) = 0; // 1 -> 0 
+		offset<uint8_t>(&create_info, 0x76) = 0; // 1 -> 0
 		offset<uint8_t>(&create_info, 0x77) = 1;
 		offset<uint8_t>(&create_info, 0x78) = 2;
-		offset<uint8_t>(&create_info, 0x79) = 2;
+		offset<uint8_t>(&create_info, 0x79) = 0; // 2 -> 0
 		offset<uint8_t>(&create_info, 0x7a) = 0;
 		offset<uint8_t>(&create_info, 0x7b) = 3;
 		offset<uint8_t>(&create_info, 0x7c) = 1;
