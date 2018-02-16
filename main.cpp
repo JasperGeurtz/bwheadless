@@ -335,9 +335,8 @@ void run() {
 
 		offset<uint16_t>(&create_info, 0x20) = map_tile_width;
 		offset<uint16_t>(&create_info, 0x22) = map_tile_height;
-		
-		// MELEE = 0x10002
-		uint32_t game_type = 0x1000a; // either 0x1000a or 0x10010
+
+		uint32_t game_type = 10; // MELEE = 0x10002
 
 		offset<uint8_t>(&create_info, 0x24) = 1; // active player count
 		offset<uint8_t>(&create_info, 0x25) = players_count;
@@ -484,7 +483,7 @@ void run() {
 
 	if (game_mode != 1) {
 		log("error: game_mode is %d\n", game_mode);
-		fatal_error("unexpected game mode");
+		//fatal_error("unexpected game mode");
 	}
 	game_mode = 3;
 
