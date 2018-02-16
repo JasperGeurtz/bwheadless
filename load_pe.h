@@ -124,14 +124,15 @@ static bool load_pe(const char*path, pe_info*ri, bool overwrite = false, const s
 
 					PIMAGE_OPTIONAL_HEADER hm_oh = (PIMAGE_OPTIONAL_HEADER)((char*)hm + hm_dos->e_lfanew + sizeof(DWORD) + sizeof(IMAGE_FILE_HEADER));
 
-					auto& exp_entry = hm_oh->DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT];
+					auto& exp_entry = hm_oh->DataDirectory[IMAGE_DIRECTORY_ENTRY_
+									      ];
 
-					PIMAGE_EXPORT_DIRECTORY export = (PIMAGE_EXPORT_DIRECTORY)((char*)hm + exp_entry.VirtualAddress);
+					PIMAGE_EXPORT_DIRECTORY export2 = (PIMAGE_EXPORT_DIRECTORY)((char*)hm + exp_entry.VirtualAddress);
 
 					if (*dw & 0x80000000) {
-						DWORD* funcs = (DWORD*)((char*)hm + export->AddressOfFunctions);
-						DWORD index = (*dw & 0xffff) - export->Base;
-						if (index < export->NumberOfFunctions) proc = (FARPROC)((char*)hm + funcs[index]);
+						DWORD* funcs = (DWORD*)((char*)hm + export2->AddressOfFunctions);
+						DWORD index = (*dw & 0xffff) - export2->Base;
+						if (index < export2->NumberOfFunctions) proc = (FARPROC)((char*)hm + funcs[index]);
 						else proc = nullptr;
 					} else {
 						log("fixme: load name\n");
